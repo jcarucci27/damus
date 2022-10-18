@@ -17,14 +17,14 @@ struct InnerTimelineView: View {
     let damus: DamusState
     let show_friend_icon: Bool
     let filter: (NostrEvent) -> Bool
-    
+
     var body: some View {
         LazyVStack {
             ForEach(events.filter(filter), id: \.id) { (ev: NostrEvent) in
                 let tm = ThreadModel(event: inner_event_or_self(ev: ev), damus_state: damus)
                 let is_chatroom = should_show_chatroom(ev)
                 let tv = ThreadView(thread: tm, damus: damus, is_chatroom: is_chatroom)
-                            
+
                 NavigationLink(destination: tv) {
                     EventView(event: ev, highlight: .none, has_action_bar: true, damus: damus, show_friend_icon: show_friend_icon)
                 }
@@ -42,11 +42,11 @@ struct TimelineView: View {
     let damus: DamusState
     let show_friend_icon: Bool
     let filter: (NostrEvent) -> Bool
-    
+
     var body: some View {
         MainContent
     }
-    
+
     var MainContent: some View {
         ScrollViewReader { scroller in
             ScrollView {
@@ -84,4 +84,3 @@ struct NavigationLazyView<Content: View>: View {
         build()
     }
 }
-
